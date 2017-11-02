@@ -1,0 +1,25 @@
+{
+  "name": "foxtrel-command-release",
+  "version": "0.0.1",
+  "description": "release",
+  "main": "release.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/qzhongyou/foxtrel-command-release.git"
+  },
+  "keywords": [
+    "foxtrel",
+    "release"
+  ],
+  "author": "玉面",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qzhongyou/foxtrel-command-release/issues"
+  },
+  "homepage": "https://github.com/qzhongyou/foxtrel-command-release#readme"
+}
