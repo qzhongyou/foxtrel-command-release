@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "release",
   "main": "release.js",
-  "dependencies": {},
+  "dependencies": {
+    "glob": "^7.1.2"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
