@@ -6,17 +6,17 @@
 
 'use strict';
 const bulid = require('./lib/bulid');
-const config = require('./lib/bulid');
 
-exports.name = "release <file>"
 
-exports.usage = '[options] <file>';
+exports.name = "release"
+
+exports.usage = '[options]';
 
 exports.desc = 'release components';
 
 exports.register = function (commander) {
     commander
-        .option('-f,--file <filename>', 'config file', String, 'foxtrel-config.js')
+        .option('-f,--file <filename>', 'config file', String, 'foxtrel.config.js')
         .option('-c, --clean', 'clean compile cache')
         .option('-w, --watch', 'monitor the changes of project')
         .option('-o, --optimize', 'with optimizing')
@@ -26,8 +26,7 @@ exports.register = function (commander) {
         .action(release)
 }
 
-function release(path, options) {
-
+function release(options) {
     //设置项目根目录
     foxtrel.project.setProjectRoot(options.root);
 
@@ -35,9 +34,9 @@ function release(path, options) {
     if (options.dest) {
         foxtrel.cache.setCachePath(options.dest);
     }
-
+    const config = require('./lib/config');
     //配置获取
-    foxtrel.config.merge(config(path, options));
+    foxtrel.config.merge(config(options));
 
     //项目配置文件
     let configFile = foxtrel.project.getProjectRoot(options.file);
@@ -48,6 +47,7 @@ function release(path, options) {
         foxtrel.cache.clean();
     }
 
+    // console.log(JSON.stringify(foxtrel.config.data));
     //构建
-    bulid(path, options);
+    bulid(options);
 }
