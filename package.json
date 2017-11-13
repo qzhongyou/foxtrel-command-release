@@ -1,6 +1,6 @@
 {
   "name": "foxtrel-command-release",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "release编译构建",
   "main": "release.js",
   "dependencies": {
