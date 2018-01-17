@@ -35,8 +35,9 @@ function release(options) {
         foxtrel.cache.setCachePath(options.dest);
     }
     const config = require('./lib/config');
+    const react = require('foxtrel-processor-react');
     //配置获取
-    foxtrel.config.merge(config(options));
+    foxtrel.config.merge({webpack:react(options)});
 
     //项目配置文件
     let configFile = foxtrel.project.getProjectRoot(options.file);
@@ -47,7 +48,6 @@ function release(options) {
         foxtrel.cache.clean();
     }
 
-    // console.log(JSON.stringify(foxtrel.config.data));
     //构建
     bulid(options);
 }
