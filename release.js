@@ -7,6 +7,7 @@
 'use strict';
 const bulid = require('./lib/bulid');
 
+const ph = require('path');
 
 exports.name = "release"
 
@@ -26,22 +27,33 @@ exports.register = function (commander) {
         .action(release)
 }
 
-function release(options) {
+function release() {
+    let options = Array.prototype.slice.call(arguments, -1)[0];
+
     //设置项目根目录
     foxtrel.project.setProjectRoot(options.root);
 
-    //设置输出路径
-    if (options.dest) {
-        foxtrel.cache.setCachePath(options.dest);
-    }
-    const config = require('./lib/config');
-    const react = require('foxtrel-processor-react');
-    //配置获取
-    foxtrel.config.merge({webpack:react(options)});
 
-    //项目配置文件
+    //配置文件读取
     let configFile = foxtrel.project.getProjectRoot(options.file);
-    if (configFile) require(configFile);
+    if (configFile) {
+        require(configFile);
+    }
+
+    //设置output(缓存)路径
+    if (!options.dest) {
+        options.dest = foxtrel.config.get('webpack.output.path') || foxtrel.config.get('name');
+    } else {
+        options.dest = ph.resolve(foxtrel.project.getProjectRoot(), options.dest);
+    }
+
+    foxtrel.cache.setCachePath(options.dest);
+
+    // open文件夹
+    if (arguments[0] == 'open') {
+        require('./lib/open')(options.dest);
+        return;
+    }
 
     //清除缓存
     if (options.clean) {
