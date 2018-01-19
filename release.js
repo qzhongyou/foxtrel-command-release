@@ -40,18 +40,19 @@ function release() {
         require(configFile);
     }
 
-    //设置output(缓存)路径
+
     if (!options.dest) {
         options.dest = foxtrel.config.get('webpack.output.path') || foxtrel.config.get('name');
     } else {
         options.dest = ph.resolve(foxtrel.project.getProjectRoot(), options.dest);
     }
-
+    //设置output(缓存)路径
     foxtrel.cache.setCachePath(options.dest);
+
 
     // open文件夹
     if (arguments[0] == 'open') {
-        require('./lib/open')(options.dest);
+        require('./lib/open')(foxtrel.cache.getCachePath());
         return;
     }
 
