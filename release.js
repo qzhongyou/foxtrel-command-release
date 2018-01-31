@@ -58,7 +58,7 @@ function release() {
 
     //清除缓存
     if (options.clean) {
-        foxtrel.cache.clean();
+        return foxtrel.cache.clean();
     }
 
     //构建
