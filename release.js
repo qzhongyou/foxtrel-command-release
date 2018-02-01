@@ -33,6 +33,8 @@ function release() {
     //设置项目根目录
     foxtrel.project.setProjectRoot(options.root);
 
+    //设置环境
+    foxtrel.config.set('env', options.env);
 
     //配置文件读取
     let configFile = foxtrel.project.getProjectRoot(options.file);
@@ -42,7 +44,7 @@ function release() {
 
 
     if (!options.dest) {
-        options.dest = foxtrel.config.get('webpack.output.path') || foxtrel.config.get('name');
+        options.dest = foxtrel.config.get('outputPath') || foxtrel.config.get('name');
     } else {
         options.dest = ph.resolve(foxtrel.project.getProjectRoot(), options.dest);
     }
